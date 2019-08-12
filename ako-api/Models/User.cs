@@ -14,7 +14,8 @@ namespace ako_api.Models
         }
 
         public int UserId { get; set; }
-        public int? AuthProviderId { get; set; }
+        [StringLength(255)]
+        public string AuthProviderId { get; set; }
         [StringLength(255)]
         public string FirstName { get; set; }
         [StringLength(255)]

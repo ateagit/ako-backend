@@ -97,6 +97,8 @@ namespace ako_api.Models
 
             modelBuilder.Entity<User>(entity =>
             {
+                entity.Property(e => e.AuthProviderId).IsUnicode(false);
+
                 entity.Property(e => e.FirstName).IsUnicode(false);
 
                 entity.Property(e => e.LastName).IsUnicode(false);
