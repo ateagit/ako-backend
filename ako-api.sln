@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.29020.237
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ako-api", "ako-api\ako-api.csproj", "{94AC5A7A-05C1-4A40-A0BE-93750C22C3C4}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ako-api", "ako-api\ako-api.csproj", "{C9193DCF-B19C-4E80-A4ED-5750985C6553}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -11,15 +11,15 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{94AC5A7A-05C1-4A40-A0BE-93750C22C3C4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{94AC5A7A-05C1-4A40-A0BE-93750C22C3C4}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{94AC5A7A-05C1-4A40-A0BE-93750C22C3C4}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{94AC5A7A-05C1-4A40-A0BE-93750C22C3C4}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C9193DCF-B19C-4E80-A4ED-5750985C6553}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C9193DCF-B19C-4E80-A4ED-5750985C6553}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C9193DCF-B19C-4E80-A4ED-5750985C6553}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C9193DCF-B19C-4E80-A4ED-5750985C6553}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
-		SolutionGuid = {3A017C1F-4C6B-4594-B2C0-FAF42A5D7501}
+		SolutionGuid = {6BCFC58D-273E-4E96-948B-CD7C021D3964}
 	EndGlobalSection
 EndGlobal

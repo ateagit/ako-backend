@@ -1,0 +1,14 @@
+C:\Users\alanu\Documents\MSA2019Assessment\backend\ako-api\ako-api\bin\Debug\netcoreapp2.2\ako-api.deps.json
+C:\Users\alanu\Documents\MSA2019Assessment\backend\ako-api\ako-api\bin\Debug\netcoreapp2.2\ako-api.runtimeconfig.json
+C:\Users\alanu\Documents\MSA2019Assessment\backend\ako-api\ako-api\bin\Debug\netcoreapp2.2\ako-api.runtimeconfig.dev.json
+C:\Users\alanu\Documents\MSA2019Assessment\backend\ako-api\ako-api\bin\Debug\netcoreapp2.2\ako-api.dll
+C:\Users\alanu\Documents\MSA2019Assessment\backend\ako-api\ako-api\bin\Debug\netcoreapp2.2\ako-api.pdb
+C:\Users\alanu\Documents\MSA2019Assessment\backend\ako-api\ako-api\obj\Debug\netcoreapp2.2\ako-api.csproj.CoreCompileInputs.cache
+C:\Users\alanu\Documents\MSA2019Assessment\backend\ako-api\ako-api\obj\Debug\netcoreapp2.2\ako-api.RazorAssemblyInfo.cache
+C:\Users\alanu\Documents\MSA2019Assessment\backend\ako-api\ako-api\obj\Debug\netcoreapp2.2\ako-api.RazorAssemblyInfo.cs
+C:\Users\alanu\Documents\MSA2019Assessment\backend\ako-api\ako-api\obj\Debug\netcoreapp2.2\ako-api.AssemblyInfoInputs.cache
+C:\Users\alanu\Documents\MSA2019Assessment\backend\ako-api\ako-api\obj\Debug\netcoreapp2.2\ako-api.AssemblyInfo.cs
+C:\Users\alanu\Documents\MSA2019Assessment\backend\ako-api\ako-api\obj\Debug\netcoreapp2.2\ako-api.RazorTargetAssemblyInfo.cache
+C:\Users\alanu\Documents\MSA2019Assessment\backend\ako-api\ako-api\obj\Debug\netcoreapp2.2\ako-api.dll
+C:\Users\alanu\Documents\MSA2019Assessment\backend\ako-api\ako-api\obj\Debug\netcoreapp2.2\ako-api.pdb
+C:\Users\alanu\Documents\MSA2019Assessment\backend\ako-api\ako-api\obj\Debug\netcoreapp2.2\ako-api.csprojAssemblyReference.cache
