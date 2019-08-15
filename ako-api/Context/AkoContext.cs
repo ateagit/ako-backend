@@ -38,7 +38,9 @@ namespace ako_api.Models
 
             modelBuilder.Entity<Comment>(entity =>
             {
-                entity.Property(e => e.Message).IsUnicode(false);
+                entity.Property(e => e.Message)
+                    .HasMaxLength(255)
+                    .IsUnicode(false);
 
                 entity.HasOne(d => d.Course)
                     .WithMany(p => p.Comment)
@@ -53,12 +55,19 @@ namespace ako_api.Models
 
             modelBuilder.Entity<Course>(entity =>
             {
-                entity.Property(e => e.Title).IsUnicode(false);
+                entity.Property(e => e.Title)
+                    .HasMaxLength(255)
+                    .IsUnicode(false);
 
                 entity.HasOne(d => d.Subject)
                     .WithMany(p => p.Course)
                     .HasForeignKey(d => d.SubjectId)
                     .HasConstraintName("FK_Subject_Course");
+
+                entity.HasOne(d => d.User)
+                    .WithMany(p => p.Course)
+                    .HasForeignKey(d => d.UserId)
+                    .HasConstraintName("FK_Course_User");
             });
 
             modelBuilder.Entity<CoursePrerequisite>(entity =>
@@ -79,7 +88,9 @@ namespace ako_api.Models
 
             modelBuilder.Entity<Subject>(entity =>
             {
-                entity.Property(e => e.Name).IsUnicode(false);
+                entity.Property(e => e.Name)
+                    .HasMaxLength(255)
+                    .IsUnicode(false);
             });
 
             modelBuilder.Entity<SubjectHeirarchy>(entity =>
@@ -97,11 +108,17 @@ namespace ako_api.Models
 
             modelBuilder.Entity<User>(entity =>
             {
-                entity.Property(e => e.AuthProviderId).IsUnicode(false);
+                entity.Property(e => e.AuthProviderId)
+                    .HasMaxLength(255)
+                    .IsUnicode(false);
 
-                entity.Property(e => e.FirstName).IsUnicode(false);
+                entity.Property(e => e.FirstName)
+                    .HasMaxLength(255)
+                    .IsUnicode(false);
 
-                entity.Property(e => e.LastName).IsUnicode(false);
+                entity.Property(e => e.LastName)
+                    .HasMaxLength(255)
+                    .IsUnicode(false);
             });
 
             modelBuilder.Entity<UserCoursePlanner>(entity =>

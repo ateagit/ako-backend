@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using ako_api.Models;
+using AutoMapper;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
@@ -14,6 +15,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
 using Microsoft.IdentityModel.Tokens;
+using Newtonsoft.Json;
 using Swashbuckle.AspNetCore.Swagger;
 
 namespace ako_api
@@ -30,7 +32,10 @@ namespace ako_api
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
+            services
+                .AddMvc()
+                .SetCompatibilityVersion(CompatibilityVersion.Version_2_2)
+                .AddJsonOptions(options => options.SerializerSettings.ReferenceLoopHandling = ReferenceLoopHandling.Ignore);
 
             services.AddDbContext<AkoContext>(options => options.UseSqlServer(Configuration.GetConnectionString("DbConnectionString")));
 
@@ -38,6 +43,15 @@ namespace ako_api
             {
                 c.SwaggerDoc("v1", new Info { Title = "AKO API", Version = "v1" });
             });
+
+            MapperConfiguration mapperConfig = new MapperConfiguration(mc =>
+            {
+                mc.AddProfile(new MappingProfile()); // registering mapping profile to be uesd in automapper
+            });
+
+            IMapper mapper = mapperConfig.CreateMapper();
+
+            services.AddSingleton(mapper); // register mapper in DI
 
             services.AddAuthentication().AddJwtBearer(options =>
             {

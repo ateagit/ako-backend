@@ -6,6 +6,8 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using ako_api.Models;
+using ako_api.Models.DTO;
+using AutoMapper;
 
 namespace ako_api.Controllers
 {
@@ -15,66 +17,81 @@ namespace ako_api.Controllers
     {
         private readonly AkoContext _context;
 
-        public CoursesController(AkoContext context)
+        private readonly IMapper _mapper;
+        public CoursesController(AkoContext context, IMapper mapper)
         {
             _context = context;
+            _mapper = mapper;
         }
 
         // GET: api/Courses
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<Course>>> GetCourse()
+        public async Task<ActionResult<IEnumerable<OutputBasicCourseDTO>>> GetCourse()
         {
-            return await _context.Course.ToListAsync();
+            List<Course> courses = await _context.Course
+                .Include(c => c.Subject)
+                .Include(c => c.User)
+                .ToListAsync();
+
+            List<OutputBasicCourseDTO> courseDTO = _mapper.Map<List<OutputBasicCourseDTO>>(courses);
+
+            return courseDTO;
         }
 
         // GET: api/Courses/5
         [HttpGet("{id}")]
-        public async Task<ActionResult<Course>> GetCourse(int id)
+        public async Task<ActionResult<OutputDetailedCourseDTO>> GetCourse(int id)
         {
-            var course = await _context.Course.FindAsync(id);
+            Course course = await _context.Course
+                .Include(c => c.Subject)
+                .Include(c => c.User)
+                .Include(c => c.CoursePrerequisiteMainCourse).ThenInclude(cq => cq.PrerequisiteCourse)
+                .Include(c => c.Comment).ThenInclude(c => c.User)
+                .SingleOrDefaultAsync(c => c.CourseId == id);
+
+            OutputDetailedCourseDTO courseDTO = _mapper.Map<OutputDetailedCourseDTO>(course);
 
             if (course == null)
             {
                 return NotFound();
             }
 
-            return course;
+            return courseDTO;
         }
 
         // PUT: api/Courses/5
         [HttpPut("{id}")]
-        public async Task<IActionResult> PutCourse(int id, Course course)
+        public async Task<IActionResult> PutCourse(int id, InputCourseDTO courseDTO)
         {
-            if (id != course.CourseId)
+
+            Course course = _mapper.Map<Course>(courseDTO);
+
+            Course existingEntry = await _context.Course.FindAsync(id);
+
+            if(existingEntry == null)
             {
                 return BadRequest();
             }
 
-            _context.Entry(course).State = EntityState.Modified;
+            existingEntry.Content = course.Content;
+            existingEntry.Title = course.Title;
+            existingEntry.CoursePrerequisiteMainCourse = course.CoursePrerequisiteMainCourse;
+            existingEntry.Rating = courseDTO.Difficulty;
 
-            try
-            {
-                await _context.SaveChangesAsync();
-            }
-            catch (DbUpdateConcurrencyException)
-            {
-                if (!CourseExists(id))
-                {
-                    return NotFound();
-                }
-                else
-                {
-                    throw;
-                }
-            }
+            _context.Update(existingEntry);
+            await _context.SaveChangesAsync();
 
-            return NoContent();
+            return Ok(existingEntry);
         }
 
         // POST: api/Courses
         [HttpPost]
-        public async Task<ActionResult<Course>> PostCourse(Course course)
+        public async Task<ActionResult<Course>> PostCourse(InputCourseDTO courseDTO)
         {
+            // TODO: Validation
+            Course course = _mapper.Map<Course>(courseDTO);
+
+
             _context.Course.Add(course);
             await _context.SaveChangesAsync();
 

@@ -41,6 +41,10 @@
       "frameworks": {
         "netcoreapp2.2": {
           "dependencies": {
+            "AutoMapper": {
+              "target": "Package",
+              "version": "[9.0.0, )"
+            },
             "Google.Apis.Auth.AspNetCore": {
               "target": "Package",
               "version": "[1.40.3, )"
