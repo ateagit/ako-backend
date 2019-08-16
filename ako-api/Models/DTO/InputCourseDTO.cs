@@ -10,7 +10,7 @@ namespace ako_api.Models.DTO
         public int SubjectId { get; set; }
         public int CreatorId { get; set; }
         public string Title { get; set; }
-        public string Content { get; set; }
+        public dynamic Content { get; set; }
         public int Difficulty { get; set; }
         public List<int> PrerequisiteCourseId { get; set; }
     }

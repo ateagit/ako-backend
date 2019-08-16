@@ -8,6 +8,7 @@ using Microsoft.EntityFrameworkCore;
 using ako_api.Models;
 using ako_api.Models.DTO;
 using AutoMapper;
+using Newtonsoft.Json;
 
 namespace ako_api.Controllers
 {
@@ -86,9 +87,10 @@ namespace ako_api.Controllers
 
         // POST: api/Courses
         [HttpPost]
-        public async Task<ActionResult<Course>> PostCourse(InputCourseDTO courseDTO)
+        public async Task<ActionResult<Course>> PostCourse([FromBody] InputCourseDTO courseDTO)
         {
             // TODO: Validation
+            courseDTO.Content = JsonConvert.SerializeObject(courseDTO.Content);
             Course course = _mapper.Map<Course>(courseDTO);
 
 

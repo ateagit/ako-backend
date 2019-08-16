@@ -27,7 +27,16 @@ namespace ako_api.Controllers
         [HttpGet]
         public async Task<ActionResult<IEnumerable<Subject>>> GetSubject()
         {
-            return await _context.Subject.ToListAsync();
+            List<Subject> subjects = await _context.Subject
+                .Include(s => s.SubjectHeirarchyParentSubject)
+                .ThenInclude(s => s.ChildSubject)
+                .ToListAsync();
+
+            List<SubjectDTO> subjectsDTO = _mapper.Map<List<SubjectDTO>>(subjects);
+
+            List<SubjectDTO> filteredDTO = subjectsDTO.Where(s => s.Children.Any()).ToList();
+
+            return Ok(filteredDTO);
         }
 
         // GET: api/Subjects/5
@@ -41,6 +50,27 @@ namespace ako_api.Controllers
                 .FirstOrDefaultAsync(s => s.SubjectId == id);
 
             SubjectDTO subjectDTO = _mapper.Map<SubjectDTO>(subject);
+            if (subject == null)
+            {
+                return NotFound();
+            }
+
+            return Ok(subjectDTO);
+        }
+
+
+        // GET: api/Subjects/5/Courses
+        [HttpGet("{id}/Courses")]
+        public async Task<ActionResult<SubjectDTO>> GetSubjectCourses(int id)
+        {
+
+            List<Subject> subject = await _context.Subject
+                .Include(s => s.Course)
+                    .ThenInclude(c => c.User)
+                .Where(s => s.SubjectId == id)
+                .ToListAsync();
+
+            List<SubjectCourseDTO> subjectDTO = _mapper.Map<List<SubjectCourseDTO>>(subject);
             if (subject == null)
             {
                 return NotFound();

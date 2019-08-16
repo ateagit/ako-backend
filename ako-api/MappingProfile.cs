@@ -41,6 +41,9 @@ namespace ako_api
 
             CreateMap<Comment, OutputCommentDTO>()
                 .ForMember(dest => dest.CreatorName, opt => opt.MapFrom(src => src.User.FirstName + " " + src.User.LastName));
+
+            CreateMap<Subject, SubjectCourseDTO>()
+                .ForMember(dest => dest.Course, opt => opt.MapFrom(src => src.Course));
         }
     }
 }

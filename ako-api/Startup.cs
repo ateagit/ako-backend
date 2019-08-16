@@ -37,6 +37,13 @@ namespace ako_api
                 .SetCompatibilityVersion(CompatibilityVersion.Version_2_2)
                 .AddJsonOptions(options => options.SerializerSettings.ReferenceLoopHandling = ReferenceLoopHandling.Ignore);
 
+            services.AddCors(o => o.AddPolicy("MyPolicy", builder =>
+            {
+                builder.AllowAnyOrigin()
+                       .AllowAnyMethod()
+                       .AllowAnyHeader();
+            }));
+
             services.AddDbContext<AkoContext>(options => options.UseSqlServer(Configuration.GetConnectionString("DbConnectionString")));
 
             services.AddSwaggerGen(c =>
@@ -82,6 +89,7 @@ namespace ako_api
                 c.SwaggerEndpoint("/swagger/v1/swagger.json", "AKOAPI V1");
                 c.RoutePrefix = string.Empty; // launch swagger from root
             });
+            app.UseCors("MyPolicy");
 
             if (env.IsDevelopment())
             {
