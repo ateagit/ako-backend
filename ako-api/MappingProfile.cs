@@ -33,7 +33,8 @@ namespace ako_api
             CreateMap<Course, OutputDetailedCourseDTO>()
                 .ForMember(dest => dest.CreatorName, opt => opt.MapFrom(src => src.User.FirstName + " " + src.User.LastName))
                 .ForMember(dest => dest.SubjectName, opt => opt.MapFrom(src => src.Subject.Name))
-                .ForMember(dest => dest.PrerequisiteCourses, opt => opt.MapFrom(src => src.CoursePrerequisiteMainCourse));
+                .ForMember(dest => dest.PrerequisiteCourses, opt => opt.MapFrom(src => src.CoursePrerequisiteMainCourse))
+                .ForMember(dest => dest.Comments, opt => opt.MapFrom(src => src.Comment));
 
             CreateMap<CoursePrerequisite, OutputPrerequisiteCourseDTO>()
                 .ForMember(dest => dest.CourseId, opt => opt.MapFrom(src => src.PrerequisiteCourse.CourseId))
@@ -44,6 +45,10 @@ namespace ako_api
 
             CreateMap<Subject, SubjectCourseDTO>()
                 .ForMember(dest => dest.Course, opt => opt.MapFrom(src => src.Course));
+
+            CreateMap<Comment, OutputCommentDTO>();
+
+            CreateMap<InputCommentDTO, Comment>();
         }
     }
 }
